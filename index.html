@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delray Beach Watches</title>
+  <meta name="description" content="Buying, selling, sourcing, and trading luxury watches in Delray Beach." />
+  <style>
+    :root{
+      --bg:#0f0d0b;
+      --panel:#171411;
+      --soft:#221d18;
+      --text:#f5efe6;
+      --muted:#c8bba9;
+      --gold:#c7a86b;
+      --line:rgba(199,168,107,.25);
+      --shadow:0 12px 40px rgba(0,0,0,.28);
+      --radius:18px;
+      --max:1200px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(199,168,107,.08), transparent 30%),
+        linear-gradient(180deg,#0c0a08 0%, #120f0c 100%);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(calc(100% - 32px), var(--max));margin:0 auto}
+    .nav{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter: blur(12px);
+      background:rgba(12,10,8,.72);
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+    .nav-inner{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:16px;padding:14px 0;
+    }
+    .brand{
+      font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+      display:flex;align-items:center;gap:10px;
+    }
+    .brand-mark{
+      width:34px;height:34px;border-radius:50%;
+      border:1px solid var(--line);
+      display:grid;place-items:center;color:var(--gold);
+      background:linear-gradient(180deg,#1f1a16,#15120f);
+      box-shadow:var(--shadow);
+      font-size:14px;
+    }
+    .nav-links{
+      display:flex;flex-wrap:wrap;gap:16px;
+      color:var(--muted);font-size:14px;
+    }
+    .nav-links a:hover,.nav-links a:focus{color:var(--text)}
+    .hero{
+      padding:72px 0 48px;
+    }
+    .hero-wrap{
+      display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:stretch;
+    }
+    .hero-card,.panel{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero-copy{padding:40px}
+    .eyebrow{
+      color:var(--gold);text-transform:uppercase;letter-spacing:.18em;
+      font-size:12px;font-weight:700;margin-bottom:14px;
+    }
+    h1,h2,h3{margin:0 0 14px}
+    h1{
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:clamp(40px,7vw,72px);
+      line-height:1.02;
+      letter-spacing:-.03em;
+    }
+    .hero-copy p{
+      margin:0 0 24px;
+      color:var(--muted);
+      font-size:18px;
+      max-width:58ch;
+    }
+    .cta-row{
+      display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px;
+    }
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:48px;padding:0 18px;border-radius:999px;
+      border:1px solid var(--line);font-weight:700;
+      transition:.2s ease;
+    }
+    .btn-primary{
+      background:linear-gradient(180deg,#d5b276,#b88f4f);
+      color:#120e09;border-color:transparent;
+    }
+    .btn-primary:hover{transform:translateY(-1px);filter:brightness(1.05)}
+    .btn-secondary{
+      color:var(--text);background:rgba(255,255,255,.02);
+    }
+    .btn-secondary:hover{background:rgba(255,255,255,.05)}
+    .stats{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+    }
+    .stat{
+      background:rgba(255,255,255,.02);
+      border:1px solid rgba(255,255,255,.05);
+      border-radius:14px;padding:14px;
+    }
+    .stat strong{display:block;font-size:22px;color:var(--gold)}
+    .stat span{color:var(--muted);font-size:13px}
+    .hero-visual{
+      min-height:100%;padding:18px;
+      display:grid;gap:16px;
+    }
+    .watch-display{
+      position:relative;overflow:hidden;border-radius:16px;min-height:420px;
+      border:1px solid rgba(255,255,255,.06);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.4)),
+        url("https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1200&q=80") center/cover no-repeat;
+    }
+    .watch-badge{
+      position:absolute;left:18px;bottom:18px;
+      background:rgba(12,10,8,.8);border:1px solid var(--line);
+      padding:12px 14px;border-radius:14px;max-width:85%;
+    }
+    .watch-badge small{display:block;color:var(--gold);text-transform:uppercase;letter-spacing:.12em}
+    .watch-badge strong{display:block;font-size:20px}
+    section{padding:28px 0}
+    .section-head{
+      display:flex;align-items:end;justify-content:space-between;gap:16px;
+      margin-bottom:18px;
+    }
+    .section-head p{margin:0;color:var(--muted);max-width:60ch}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.01));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+    .card img{aspect-ratio:4/3;object-fit:cover}
+    .card-body{padding:18px}
+    .muted{color:var(--muted)}
+    .tag{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;
+      background:rgba(199,168,107,.12);
+      color:var(--gold);font-size:12px;font-weight:700;
+      text-transform:uppercase;letter-spacing:.08em;
+    }
+    .price{
+      font-size:24px;font-weight:800;color:var(--gold);margin:8px 0 0;
+    }
+    .features{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+    }
+    .feature{padding:22px}
+    .feature h3{font-size:20px}
+    .feature p{margin:0;color:var(--muted)}
+    .gallery img{aspect-ratio:1/1;object-fit:cover}
+    .quote-wrap{
+      display:grid;grid-template-columns:1fr .95fr;gap:18px;
+    }
+    .quote-info,.quote-form{padding:24px}
+    .contact-list{display:grid;gap:12px;margin-top:18px}
+    .contact-item{
+      padding:14px 16px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02)
+    }
+    form{display:grid;gap:14px}
+    input,textarea,select{
+      width:100%;padding:14px 15px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.08);
+      background:#120f0c;color:var(--text);font:inherit;
+      outline:none;
+    }
+    input:focus,textarea:focus,select:focus{
+      border-color:var(--gold);
+      box-shadow:0 0 0 3px rgba(199,168,107,.12);
+    }
+    textarea{min-height:140px;resize:vertical}
+    .inline-note{
+      margin-top:12px;color:var(--muted);font-size:14px
+    }
+    .instagram{
+      display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+      gap:16px;padding:24px;
+    }
+    footer{
+      padding:40px 0 56px;color:var(--muted)
+    }
+    .footer-box{
+      padding:20px;border:1px solid rgba(255,255,255,.06);
+      border-radius:16px;background:rgba(255,255,255,.02);
+      display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;
+    }
+    @media (max-width: 960px){
+      .hero-wrap,.quote-wrap,.features,.grid-4,.grid-3{grid-template-columns:1fr 1fr}
+      .hero-copy{padding:28px}
+      .watch-display{min-height:320px}
+    }
+    @media (max-width: 680px){
+      .nav-inner{align-items:flex-start;flex-direction:column}
+      .hero{padding-top:40px}
+      .hero-wrap,.quote-wrap,.features,.grid-4,.grid-3,.stats{grid-template-columns:1fr}
+      .hero-copy p{font-size:16px}
+      h2{font-size:28px}
+      .section-head{flex-direction:column;align-items:flex-start}
+      .instagram,.footer-box{align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+
+  <!--
+    EDIT GUIDE:
+    1) Business name: search for "Delray Beach Watches"
+    2) Phone number: search for "8504851221"
+    3) Email: search for "info@delraybeachwatches.com"
+    4) Instagram link: search for "instagram.com/delraybeachwatches"
+    5) Watch listings: search for "LISTING 1", "LISTING 2", etc.
+    6) Gallery photos: search for "GALLERY IMAGE"
+    7) Netlify form: works when hosted on Netlify
+  -->
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="brand">
+        <span class="brand-mark">DB</span>
+        <span>Delray Beach Watches</span>
+      </a>
+      <div class="nav-links">
+        <a href="#inventory">Inventory</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#quote">Request a Quote</a>
+        <a href="#instagram">Instagram</a>
+        <a href="tel:8504851221">Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-wrap">
+        <div class="hero-card hero-copy">
+          <div class="eyebrow">Luxury Timepieces • Delray Beach</div>
+          <h1>Buy. Sell. Trade. Source with confidence.</h1>
+          <p>
+            Delray Beach Watches helps clients buy, sell, trade, and source premium watches
+            with a straightforward, white-glove experience. From daily icons to collector pieces,
+            we focus on trust, presentation, and speed.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#quote">Request a Quote</a>
+            <a class="btn btn-secondary" href="tel:8504851221">Call (850) 485-1221</a>
+            <a class="btn btn-secondary" href="https://instagram.com/delraybeachwatches" target="_blank" rel="noopener">View Instagram</a>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <strong>Buy</strong>
+              <span>Cash offers on select luxury watches</span>
+            </div>
+            <div class="stat">
+              <strong>Sell</strong>
+              <span>Curated pieces with direct support</span>
+            </div>
+            <div class="stat">
+              <strong>Source</strong>
+              <span>Tell us what you want and we’ll hunt it down</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card hero-visual">
+          <div class="watch-display">
+            <div class="watch-badge">
+              <small>Featured Timepiece</small>
+              <strong>Rolex GMT‑Master II</strong>
+              <span class="muted">Replace this image or text with your current featured watch.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="inventory">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Current Inventory</div>
+            <h2>Featured Watches</h2>
+          </div>
+          <p>Use these cards to highlight available pieces. You can edit the image links, model names, condition notes, and prices directly inside this file.</p>
+        </div>
+
+        <div class="grid-3">
+          <!-- LISTING 1 -->
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=1200&q=80" alt="Rolex Submariner">
+            <div class="card-body">
+              <span class="tag">Rolex</span>
+              <h3>Submariner Date</h3>
+              <p class="muted">Black dial, excellent condition, full set.</p>
+              <p class="price">$13,950</p>
+            </div>
+          </article>
+
+          <!-- LISTING 2 -->
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=1200&q=80" alt="Cartier Santos">
+            <div class="card-body">
+              <span class="tag">Cartier</span>
+              <h3>Santos Medium</h3>
+              <p class="muted">Automatic movement, blue hands, clean bracelet.</p>
+              <p class="price">$6,850</p>
+            </div>
+          </article>
+
+          <!-- LISTING 3 -->
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=1200&q=80" alt="Omega Speedmaster">
+            <div class="card-body">
+              <span class="tag">Omega</span>
+              <h3>Speedmaster Professional</h3>
+              <p class="muted">Classic moonwatch styling, sharp case, box included.</p>
+              <p class="price">$5,975</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Why Clients Work With Us</div>
+            <h2>Built for easy trust</h2>
+          </div>
+          <p>This section helps establish credibility even before someone calls or messages you.</p>
+        </div>
+
+        <div class="features">
+          <div class="panel feature">
+            <h3>Transparent Offers</h3>
+            <p>Fair market-based pricing with straightforward communication from first contact to final deal.</p>
+          </div>
+          <div class="panel feature">
+            <h3>Luxury Focus</h3>
+            <p>Rolex, Cartier, Omega, Tudor, AP, Patek, and other premium brands with careful presentation.</p>
+          </div>
+          <div class="panel feature">
+            <h3>Fast Response</h3>
+            <p>Quick callbacks, quote requests, sourcing help, and direct communication for serious buyers and sellers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Photo Gallery</div>
+            <h2>Recent Pieces & Lifestyle Shots</h2>
+          </div>
+          <p>Swap these image links out with your own watch photos anytime.</p>
+        </div>
+
+        <div class="grid-4 gallery">
+          <!-- GALLERY IMAGE 1 -->
+          <article class="card"><img src="https://images.unsplash.com/photo-1434056886845-dac89ffe9b56?auto=format&fit=crop&w=1200&q=80" alt="Luxury watch closeup"></article>
+          <!-- GALLERY IMAGE 2 -->
+          <article class="card"><img src="https://images.unsplash.com/photo-1490367532201-b9bc1dc483f6?auto=format&fit=crop&w=1200&q=80" alt="Watch with leather strap"></article>
+          <!-- GALLERY IMAGE 3 -->
+          <article class="card"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=80" alt="Watch in hand"></article>
+          <!-- GALLERY IMAGE 4 -->
+          <article class="card"><img src="https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?auto=format&fit=crop&w=1200&q=80" alt="Luxury watch display"></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="quote">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Request a Quote</div>
+            <h2>Sell, trade, or source your next watch</h2>
+          </div>
+          <p>This form is already set up for Netlify Forms. When the site is hosted on Netlify, submissions can be collected there.</p>
+        </div>
+
+        <div class="quote-wrap">
+          <div class="panel quote-info">
+            <h3>Contact</h3>
+            <p class="muted">
+              Reach out for purchase offers, sourcing requests, trades, or questions about current inventory.
+            </p>
+
+            <div class="contact-list">
+              <a class="contact-item" href="tel:8504851221"><strong>Phone:</strong> (850) 485-1221</a>
+              <a class="contact-item" href="mailto:info@delraybeachwatches.com"><strong>Email:</strong> info@delraybeachwatches.com</a>
+              <a class="contact-item" href="https://instagram.com/delraybeachwatches" target="_blank" rel="noopener"><strong>Instagram:</strong> @delraybeachwatches</a>
+              <div class="contact-item"><strong>Location:</strong> Delray Beach, Florida</div>
+            </div>
+
+            <p class="inline-note">
+              To change your email or Instagram, search this file for the current values and replace them.
+            </p>
+          </div>
+
+          <div class="panel quote-form">
+            <form name="quote-request" method="POST" data-netlify="true">
+              <input type="hidden" name="form-name" value="quote-request">
+              <label>
+                Name
+                <input type="text" name="name" placeholder="Your name" required>
+              </label>
+              <label>
+                Email
+                <input type="email" name="email" placeholder="you@example.com" required>
+              </label>
+              <label>
+                Phone
+                <input type="tel" name="phone" placeholder="Best number to reach you">
+              </label>
+              <label>
+                I want to…
+                <select name="request_type">
+                  <option value="sell">Sell a watch</option>
+                  <option value="buy">Buy a watch</option>
+                  <option value="trade">Trade a watch</option>
+                  <option value="source">Source a specific watch</option>
+                </select>
+              </label>
+              <label>
+                Details
+                <textarea name="details" placeholder="Brand, model, reference number, condition, asking price, or what you're looking for."></textarea>
+              </label>
+              <button class="btn btn-primary" type="submit">Send Request</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="instagram">
+      <div class="container">
+        <div class="panel instagram">
+          <div>
+            <div class="eyebrow">Instagram</div>
+            <h2>Keep your latest pieces moving</h2>
+            <p class="muted">Link your buyers directly to your Instagram page for fresh inventory, wrist shots, and story updates.</p>
+          </div>
+          <a class="btn btn-secondary" href="https://instagram.com/delraybeachwatches" target="_blank" rel="noopener">Open Instagram</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-box">
+        <div>
+          <strong>Delray Beach Watches</strong><br>
+          Buying, selling, trading, and sourcing luxury watches.
+        </div>
+        <div>
+          <a href="tel:8504851221">(850) 485-1221</a> •
+          <a href="mailto:info@delraybeachwatches.com">info@delraybeachwatches.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
