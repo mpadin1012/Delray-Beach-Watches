@@ -2,8 +2,6 @@ backend:
   name: git-gateway
   branch: main
 
-local_backend: false
-
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
@@ -11,48 +9,23 @@ collections:
   - name: "site"
     label: "Site Settings"
     files:
-      - label: "Main Site Content"
-        name: "main_site"
+      - label: "Business Info"
+        name: "business"
         file: "content/site.json"
-        format: "json"
         fields:
-          - { label: "Business Name", name: "business_name", widget: "string" }
-          - { label: "Phone Digits Only", name: "phone_raw", widget: "string", hint: "Example: 8504851221" }
-          - { label: "Phone Display", name: "phone_display", widget: "string", hint: "Example: (850) 485-1221" }
-          - { label: "Email", name: "email", widget: "string" }
-          - { label: "Instagram URL", name: "instagram_url", widget: "string" }
-          - { label: "Instagram Handle", name: "instagram_handle", widget: "string" }
-          - { label: "Location", name: "location", widget: "string" }
-          - { label: "Hero Eyebrow", name: "hero_eyebrow", widget: "string" }
-          - { label: "Hero Title", name: "hero_title", widget: "string" }
-          - { label: "Hero Description", name: "hero_description", widget: "text" }
-          - { label: "Featured Watch Name", name: "featured_watch_name", widget: "string" }
-          - { label: "Featured Watch Note", name: "featured_watch_note", widget: "text" }
-          - { label: "Featured Watch Image", name: "featured_watch_image", widget: "image" }
+          - { label: "Business Name", name: "businessName", widget: "string" }
+          - { label: "Phone", name: "phone", widget: "string" }
 
   - name: "inventory"
-    label: "Inventory & Gallery"
+    label: "Inventory"
     files:
-      - label: "Inventory and Gallery"
-        name: "inventory_gallery"
+      - label: "Inventory Data"
+        name: "inventoryData"
         file: "content/inventory.json"
-        format: "json"
         fields:
           - label: "Watches"
             name: "watches"
             widget: "list"
-            summary: "{{fields.brand}} — {{fields.model}}"
             fields:
-              - { label: "Brand", name: "brand", widget: "string" }
-              - { label: "Model", name: "model", widget: "string" }
+              - { label: "Name", name: "name", widget: "string" }
               - { label: "Price", name: "price", widget: "string" }
-              - { label: "Short Note", name: "note", widget: "string" }
-              - { label: "Image", name: "image", widget: "image" }
-              - { label: "Alt Text", name: "alt", widget: "string", required: false }
-          - label: "Gallery Images"
-            name: "gallery"
-            widget: "list"
-            summary: "{{fields.alt}}"
-            fields:
-              - { label: "Image", name: "image", widget: "image" }
-              - { label: "Alt Text", name: "alt", widget: "string", required: false }
