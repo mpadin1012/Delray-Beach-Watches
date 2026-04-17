@@ -6,26 +6,11 @@ media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - name: "site"
-    label: "Site Settings"
+  - name: "test"
+    label: "Test"
     files:
-      - label: "Business Info"
-        name: "business"
+      - label: "Test File"
+        name: "testfile"
         file: "content/site.json"
         fields:
-          - { label: "Business Name", name: "businessName", widget: "string" }
           - { label: "Phone", name: "phone", widget: "string" }
-
-  - name: "inventory"
-    label: "Inventory"
-    files:
-      - label: "Inventory Data"
-        name: "inventoryData"
-        file: "content/inventory.json"
-        fields:
-          - label: "Watches"
-            name: "watches"
-            widget: "list"
-            fields:
-              - { label: "Name", name: "name", widget: "string" }
-              - { label: "Price", name: "price", widget: "string" }
