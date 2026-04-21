@@ -6,11 +6,14 @@ media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - name: "test"
-    label: "Test"
+  - name: "pages"
+    label: "Pages"
     files:
-      - label: "Test File"
-        name: "testfile"
-        file: "content/site.json"
+      - file: "content/home.md"
+        label: "Home Page"
+        name: "home"
         fields:
-          - { label: "Phone", name: "phone", widget: "string" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Headline", name: "headline", widget: "string" }
+          - { label: "Subheadline", name: "subheadline", widget: "text" }
+          - { label: "Hero Image", name: "hero_image", widget: "image", required: false }
