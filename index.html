@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Delray Beach Watches</title>
-
   <style>
     body {
       margin: 0;
@@ -31,6 +30,8 @@
     .hero img {
       width: 100%;
       border-radius: 12px;
+      object-fit: cover;
+      max-height: 500px;
     }
 
     .hero h1 {
@@ -41,6 +42,7 @@
     .hero p {
       color: #666;
       font-size: 16px;
+      line-height: 1.5;
     }
 
     .buttons {
@@ -57,6 +59,8 @@
       flex: 1;
       min-width: 120px;
       font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .btn-primary {
@@ -67,6 +71,7 @@
     .btn-secondary {
       background: white;
       border: 1px solid #ddd;
+      color: #1c1c1c;
     }
 
     h2 {
@@ -89,7 +94,9 @@
 
     .card img {
       width: 100%;
-      height: auto;
+      height: 250px;
+      object-fit: cover;
+      display: block;
     }
 
     .card-content {
@@ -99,6 +106,7 @@
     .card-title {
       font-weight: bold;
       margin-bottom: 5px;
+      font-size: 18px;
     }
 
     .price {
@@ -110,6 +118,8 @@
     .card p {
       color: #666;
       font-size: 14px;
+      margin: 0;
+      line-height: 1.5;
     }
 
     .contact {
@@ -130,67 +140,83 @@
     }
   </style>
 </head>
-
 <body>
+  <header id="site-title">Delray Beach Watches</header>
 
-<header>
-  Delray Beach Watches
-</header>
+  <div class="container">
+    <div class="hero">
+      <img id="hero-image" src="" alt="Hero watch image" />
+      <h1 id="hero-headline">Buy, Sell & Trade Luxury Watches</h1>
+      <p id="hero-subheadline">Premium timepieces. Trusted local service. Simple, fast transactions.</p>
 
-<div class="container">
-
-  <div class="hero">
-    <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49" />
-    <h1>Buy, Sell & Trade Luxury Watches</h1>
-    <p>Premium timepieces. Trusted local service. Simple, fast transactions.</p>
-
-    <div class="buttons">
-      <div class="btn btn-primary">View Inventory</div>
-      <div class="btn btn-secondary">Contact Us</div>
-    </div>
-  </div>
-
-  <h2>Featured Inventory</h2>
-
-  <div class="grid">
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa">
-      <div class="card-content">
-        <div class="card-title">Rolex Submariner</div>
-        <div class="price">$12,500</div>
-        <p>Black dial, stainless steel, excellent condition.</p>
+      <div class="buttons">
+        <a class="btn btn-primary" href="#inventory">View Inventory</a>
+        <a class="btn btn-secondary" href="#contact">Contact Us</a>
       </div>
     </div>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3">
-      <div class="card-content">
-        <div class="card-title">Omega Speedmaster</div>
-        <div class="price">$6,950</div>
-        <p>Classic chronograph styling.</p>
-      </div>
-    </div>
+    <h2 id="inventory">Featured Inventory</h2>
+    <div class="grid" id="watch-grid"></div>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1612817159949-195b6eb9e31a">
-      <div class="card-content">
-        <div class="card-title">Cartier Santos</div>
-        <div class="price">$7,800</div>
-        <p>Timeless square case design.</p>
-      </div>
+    <div class="contact" id="contact">
+      <h2>Contact</h2>
+      <div><strong>Phone:</strong> <span id="phone"></span></div>
+      <div><strong>Email:</strong> <span id="email"></span></div>
+      <div><strong>Location:</strong> <span id="location"></span></div>
     </div>
-
   </div>
 
-  <div class="contact">
-    <h2>Contact</h2>
-    <div><strong>Phone:</strong> 850-485-1221</div>
-    <div><strong>Email:</strong> info@delraybeachwatches.com</div>
-    <div><strong>Location:</strong> Delray Beach, FL</div>
-  </div>
+  <script>
+    async function loadSite() {
+      const siteRes = await fetch('/content/site.json');
+      const site = await siteRes.json();
 
-</div>
+      document.title = site.siteTitle || 'Delray Beach Watches';
+      document.getElementById('site-title').textContent = site.siteTitle || 'Delray Beach Watches';
+      document.getElementById('hero-headline').textContent = site.heroHeadline || '';
+      document.getElementById('hero-subheadline').textContent = site.heroSubheadline || '';
+      document.getElementById('phone').textContent = site.phone || '';
+      document.getElementById('email').textContent = site.email || '';
+      document.getElementById('location').textContent = site.location || '';
 
+      const heroImage = document.getElementById('hero-image');
+      heroImage.src = site.heroImage || 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49';
+    }
+
+    async function loadWatches() {
+      const watchRes = await fetch('/content/watches.json');
+      const watches = await watchRes.json();
+      const grid = document.getElementById('watch-grid');
+
+      grid.innerHTML = '';
+
+      watches.forEach(watch => {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        card.innerHTML = `
+          <img src="${watch.image || ''}" alt="${watch.name || 'Watch'}">
+          <div class="card-content">
+            <div class="card-title">${watch.name || ''}</div>
+            <div class="price">${watch.price || ''}</div>
+            <p>${watch.description || ''}</p>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    async function init() {
+      try {
+        await loadSite();
+        await loadWatches();
+      } catch (error) {
+        console.error('Error loading content:', error);
+      }
+    }
+
+    init();
+  </script>
 </body>
 </html>
