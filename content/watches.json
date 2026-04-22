@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Rolex Submariner",
+    "price": "$12,500",
+    "description": "Black dial, stainless steel, excellent condition.",
+    "image": "https://images.unsplash.com/photo-1547996160-81dfa63595aa"
+  },
+  {
+    "name": "Omega Speedmaster",
+    "price": "$6,950",
+    "description": "Classic chronograph styling.",
+    "image": "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3"
+  },
+  {
+    "name": "Cartier Santos",
+    "price": "$7,800",
+    "description": "Timeless square case design.",
+    "image": "https://images.unsplash.com/photo-1612817159949-195b6eb9e31a"
+  }
+]
