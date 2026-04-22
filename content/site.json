@@ -1,25 +1,9 @@
 {
-  "items": [
-    {
-      "name": "Rolex Submariner",
-      "price": "$12,500",
-      "description": "Black dial, stainless steel, excellent condition.",
-      "image": "https://images.unsplash.com/photo-1547996160-81dfa63595aa",
-      "status": "available"
-    },
-    {
-      "name": "Omega Speedmaster",
-      "price": "$6,950",
-      "description": "Classic chronograph styling.",
-      "image": "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3",
-      "status": "available"
-    },
-    {
-      "name": "Cartier Santos",
-      "price": "Sold",
-      "description": "Timeless square case design.",
-      "image": "https://images.unsplash.com/photo-1612817159949-195b6eb9e31a",
-      "status": "sold"
-    }
-  ]
+  "siteTitle": "Delray Beach Watches",
+  "heroHeadline": "Curated Luxury Watches for Collectors and Enthusiasts",
+  "heroSubheadline": "Buy, sell, and trade exceptional timepieces with a boutique experience in Delray Beach.",
+  "heroImage": "https://images.unsplash.com/photo-1523170335258-f5ed11844a49",
+  "phone": "850-485-1221",
+  "email": "delraybeachwatches@gmail.com",
+  "location": "Delray Beach, Florida"
 }
