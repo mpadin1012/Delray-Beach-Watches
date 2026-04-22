@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Delray Beach Watches</title>
+
   <style>
     body {
       margin: 0;
@@ -140,83 +141,89 @@
     }
   </style>
 </head>
+
 <body>
-  <header id="site-title">Delray Beach Watches</header>
 
-  <div class="container">
-    <div class="hero">
-      <img id="hero-image" src="" alt="Hero watch image" />
-      <h1 id="hero-headline">Buy, Sell & Trade Luxury Watches</h1>
-      <p id="hero-subheadline">Premium timepieces. Trusted local service. Simple, fast transactions.</p>
+<header id="site-title">Delray Beach Watches</header>
 
-      <div class="buttons">
-        <a class="btn btn-primary" href="#inventory">View Inventory</a>
-        <a class="btn btn-secondary" href="#contact">Contact Us</a>
-      </div>
-    </div>
+<div class="container">
 
-    <h2 id="inventory">Featured Inventory</h2>
-    <div class="grid" id="watch-grid"></div>
+  <div class="hero">
+    <img id="hero-image" src="" />
+    <h1 id="hero-headline"></h1>
+    <p id="hero-subheadline"></p>
 
-    <div class="contact" id="contact">
-      <h2>Contact</h2>
-      <div><strong>Phone:</strong> <span id="phone"></span></div>
-      <div><strong>Email:</strong> <span id="email"></span></div>
-      <div><strong>Location:</strong> <span id="location"></span></div>
+    <div class="buttons">
+      <a class="btn btn-primary" href="#inventory">View Inventory</a>
+      <a class="btn btn-secondary" href="#contact">Contact Us</a>
     </div>
   </div>
 
-  <script>
-    async function loadSite() {
-      const siteRes = await fetch('/content/site.json');
-      const site = await siteRes.json();
+  <h2 id="inventory">Featured Inventory</h2>
+  <div class="grid" id="watch-grid"></div>
 
-      document.title = site.siteTitle || 'Delray Beach Watches';
-      document.getElementById('site-title').textContent = site.siteTitle || 'Delray Beach Watches';
-      document.getElementById('hero-headline').textContent = site.heroHeadline || '';
-      document.getElementById('hero-subheadline').textContent = site.heroSubheadline || '';
-      document.getElementById('phone').textContent = site.phone || '';
-      document.getElementById('email').textContent = site.email || '';
-      document.getElementById('location').textContent = site.location || '';
+  <div class="contact" id="contact">
+    <h2>Contact</h2>
+    <div><strong>Phone:</strong> <span id="phone"></span></div>
+    <div><strong>Email:</strong> <span id="email"></span></div>
+    <div><strong>Location:</strong> <span id="location"></span></div>
+  </div>
 
-      const heroImage = document.getElementById('hero-image');
-      heroImage.src = site.heroImage || 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49';
-    }
+</div>
 
-    async function loadWatches() {
-      const watchRes = await fetch('/content/watches.json');
-      const watches = await watchRes.json();
-      const grid = document.getElementById('watch-grid');
+<script>
+async function loadSite() {
+  const res = await fetch('/content/site.json');
+  const data = await res.json();
 
-      grid.innerHTML = '';
+  document.title = data.siteTitle || '';
+  document.getElementById('site-title').textContent = data.siteTitle || '';
+  document.getElementById('hero-headline').textContent = data.heroHeadline || '';
+  document.getElementById('hero-subheadline').textContent = data.heroSubheadline || '';
+  document.getElementById('phone').textContent = data.phone || '';
+  document.getElementById('email').textContent = data.email || '';
+  document.getElementById('location').textContent = data.location || '';
 
-      watches.forEach(watch => {
-        const card = document.createElement('div');
-        card.className = 'card';
+  document.getElementById('hero-image').src =
+    data.heroImage || 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49';
+}
 
-        card.innerHTML = `
-          <img src="${watch.image || ''}" alt="${watch.name || 'Watch'}">
-          <div class="card-content">
-            <div class="card-title">${watch.name || ''}</div>
-            <div class="price">${watch.price || ''}</div>
-            <p>${watch.description || ''}</p>
-          </div>
-        `;
+async function loadWatches() {
+  const res = await fetch('/content/watches.json');
+  const data = await res.json();
 
-        grid.appendChild(card);
-      });
-    }
+  const watches = data.items || [];
+  const grid = document.getElementById('watch-grid');
+  grid.innerHTML = '';
 
-    async function init() {
-      try {
-        await loadSite();
-        await loadWatches();
-      } catch (error) {
-        console.error('Error loading content:', error);
-      }
-    }
+  watches.forEach(watch => {
+    const card = document.createElement('div');
+    card.className = 'card';
 
-    init();
-  </script>
+    card.innerHTML = `
+      <img src="${watch.image || ''}">
+      <div class="card-content">
+        <div class="card-title">${watch.name || ''}</div>
+        <div class="price">${watch.price || ''}</div>
+        <p>${watch.description || ''}</p>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+async function init() {
+  try {
+    await loadSite();
+    await loadWatches();
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+init();
+</script>
+
 </body>
 </html>
