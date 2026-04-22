@@ -1,490 +1,212 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Delray Beach Watches</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Delray Beach Watches</title>
 
-  <style>
-    :root {
-      --bg: #0c0c0c;
-      --panel: #151515;
-      --text: #f5f1e8;
-      --muted: #b7aa92;
-      --gold: #c6a66b;
-      --border: rgba(198, 166, 107, 0.2);
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-    }
+<style>
+:root {
+  --bg:#0c0c0c;
+  --panel:#151515;
+  --text:#f5f1e8;
+  --gold:#c6a66b;
+  --border:rgba(198,166,107,0.2);
+}
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+body{
+  margin:0;
+  font-family:Georgia,serif;
+  background:#0c0c0c;
+  color:var(--text);
+}
 
-    body {
-      margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      background: linear-gradient(180deg, #080808 0%, #111111 100%);
-      color: var(--text);
-    }
+header{
+  text-align:center;
+  padding:20px;
+  color:var(--gold);
+  font-size:22px;
+}
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(10, 10, 10, 0.92);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-    }
+.hero img{
+  width:100%;
+  border-radius:12px;
+}
 
-    .topbar {
-      max-width: 1180px;
-      margin: auto;
-      padding: 18px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-    }
+.hero h1{
+  font-size:32px;
+  margin-top:15px;
+}
 
-    .brand {
-      font-size: 22px;
-      letter-spacing: 1.5px;
-      font-weight: 700;
-      color: var(--gold);
-      text-transform: uppercase;
-    }
+.hero p{
+  color:#cfc2a8;
+}
 
-    .nav {
-      display: flex;
-      gap: 18px;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      color: #ddd;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:15px;
+  margin-top:20px;
+}
 
-    .nav a:hover {
-      color: var(--gold);
-    }
+.card{
+  background:#151515;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid var(--border);
+}
 
-    .container {
-      max-width: 1180px;
-      margin: auto;
-      padding: 28px 20px 60px;
-    }
+.card img{
+  width:100%;
+  height:250px;
+  object-fit:cover;
+}
 
-    .hero {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 26px;
-      align-items: center;
-      padding: 30px 0 20px;
-    }
+.card-content{
+  padding:15px;
+}
 
-    .hero-copy {
-      background: linear-gradient(180deg, rgba(198,166,107,0.08), rgba(255,255,255,0.02));
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 34px;
-      box-shadow: var(--shadow);
-    }
+.price{
+  color:var(--gold);
+}
 
-    .eyebrow {
-      display: inline-block;
-      margin-bottom: 14px;
-      color: var(--gold);
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
+.contact{
+  margin-top:40px;
+}
 
-    .hero h1 {
-      margin: 0 0 14px;
-      font-size: 54px;
-      line-height: 0.95;
-      color: #fff8ea;
-      letter-spacing: -1px;
-    }
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:15px;
+}
 
-    .hero p {
-      margin: 0;
-      color: #d4c8b4;
-      font-family: Arial, sans-serif;
-      font-size: 17px;
-      line-height: 1.7;
-      max-width: 560px;
-    }
+.contact-card{
+  background:#151515;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+}
 
-    .buttons {
-      margin-top: 26px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
+.contact-card strong{
+  color:var(--gold);
+}
 
-    .btn {
-      padding: 14px 18px;
-      border-radius: 999px;
-      font-family: Arial, sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      display: inline-block;
-      transition: 0.2s ease;
-    }
+.contact-card a{
+  color:white;
+  display:block;
+  margin-top:5px;
+}
 
-    .btn-primary {
-      background: linear-gradient(180deg, #d7b57a, #b99257);
-      color: #111;
-    }
-
-    .btn-secondary {
-      border: 1px solid var(--border);
-      color: var(--text);
-      background: rgba(255,255,255,0.02);
-    }
-
-    .hero-image-wrap {
-      border-radius: 22px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      background: var(--panel);
-    }
-
-    .hero-image-wrap img {
-      width: 100%;
-      height: 100%;
-      min-height: 520px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .section-title {
-      margin: 38px 0 18px;
-      font-size: 30px;
-      color: #fff4df;
-      letter-spacing: -0.5px;
-    }
-
-    .section-sub {
-      margin: -8px 0 20px;
-      color: var(--muted);
-      font-family: Arial, sans-serif;
-      font-size: 15px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .card {
-      background: linear-gradient(180deg, #151515, #101010);
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-
-    .card img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .card-content {
-      padding: 18px;
-    }
-
-    .card-title {
-      color: #fff4df;
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-
-    .price {
-      color: var(--gold);
-      font-family: Arial, sans-serif;
-      font-weight: 700;
-      margin-bottom: 8px;
-      font-size: 15px;
-    }
-
-    .card p {
-      margin: 0;
-      color: #ccbfa9;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .services {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 8px;
-    }
-
-    .service-card,
-    .contact {
-      background: linear-gradient(180deg, #151515, #101010);
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-
-    .service-card {
-      padding: 22px;
-    }
-
-    .service-card h3 {
-      margin: 0 0 8px;
-      color: #fff4df;
-      font-size: 20px;
-    }
-
-    .service-card p {
-      margin: 0;
-      color: #ccbfa9;
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
-    .contact {
-      margin-top: 30px;
-      padding: 26px;
-    }
-
-    .contact h2 {
-      margin: 0 0 14px;
-      color: #fff4df;
-      font-size: 30px;
-    }
-
-    .contact-row {
-      margin-bottom: 10px;
-      font-family: Arial, sans-serif;
-      color: #d9cbb4;
-      line-height: 1.6;
-    }
-
-    .contact strong {
-      color: var(--gold);
-    }
-
-    .contact a {
-      color: #f5f1e8;
-    }
-
-    footer {
-      padding: 18px 20px 40px;
-      text-align: center;
-      color: #9f927c;
-      font-family: Arial, sans-serif;
-      font-size: 13px;
-    }
-
-    @media (max-width: 980px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-
-      .grid,
-      .services {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .hero-image-wrap img {
-        min-height: 360px;
-      }
-    }
-
-    @media (max-width: 680px) {
-      .topbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .nav {
-        width: 100%;
-        justify-content: space-between;
-        flex-wrap: wrap;
-      }
-
-      .hero h1 {
-        font-size: 38px;
-      }
-
-      .grid,
-      .services {
-        grid-template-columns: 1fr;
-      }
-
-      .buttons {
-        flex-direction: column;
-      }
-
-      .btn {
-        text-align: center;
-      }
-
-      .hero-copy {
-        padding: 24px;
-      }
-
-      .hero-image-wrap img {
-        min-height: 280px;
-      }
-    }
-  </style>
+@media(min-width:768px){
+  .grid{grid-template-columns:repeat(3,1fr);}
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  <div class="topbar">
-    <div class="brand" id="site-title">Delray Beach Watches</div>
-    <nav class="nav">
-      <a href="#inventory">Inventory</a>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
+<header id="site-title">Delray Beach Watches</header>
 
 <div class="container">
 
-  <section class="hero">
-    <div class="hero-copy">
-      <div class="eyebrow">Luxury Timepieces</div>
-      <h1 id="hero-headline">Curated Luxury Watches for Collectors and Enthusiasts</h1>
-      <p id="hero-subheadline">Buy, sell, and trade exceptional timepieces with a boutique experience in Delray Beach.</p>
+<div class="hero">
+<img id="hero-image" src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49">
+<h1 id="hero-headline">Curated Luxury Watches</h1>
+<p id="hero-subheadline">Buy, sell, and trade premium timepieces in Delray Beach.</p>
+</div>
 
-      <div class="buttons">
-        <a class="btn btn-primary" href="#inventory">View Inventory</a>
-        <a class="btn btn-secondary" href="#contact">Contact Us</a>
-      </div>
-    </div>
+<h2>Featured Inventory</h2>
+<div class="grid" id="watch-grid"></div>
 
-    <div class="hero-image-wrap">
-      <img id="hero-image" src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49" alt="Luxury watch">
-    </div>
-  </section>
+<div class="contact">
+<h2>Contact</h2>
 
-  <section>
-    <h2 class="section-title" id="inventory">Featured Inventory</h2>
-    <div class="section-sub">Carefully selected pieces presented in a clean, high-end format.</div>
-    <div class="grid" id="watch-grid"></div>
-  </section>
+<div class="contact-grid">
 
-  <section id="services">
-    <h2 class="section-title">Our Services</h2>
-    <div class="section-sub">A more premium way to present what you do.</div>
+<div class="contact-card">
+<strong>Call</strong>
+<a id="phone-link" href="tel:8504851221">850-485-1221</a>
+</div>
 
-    <div class="services">
-      <div class="service-card">
-        <h3>Buy</h3>
-        <p>Shop curated luxury watches with a smooth, private-boutique feel.</p>
-      </div>
-      <div class="service-card">
-        <h3>Sell</h3>
-        <p>Offer your watch for sale with a straightforward and professional process.</p>
-      </div>
-      <div class="service-card">
-        <h3>Trade</h3>
-        <p>Upgrade your collection through seamless trade opportunities.</p>
-      </div>
-    </div>
-  </section>
+<div class="contact-card">
+<strong>Email</strong>
+<a id="email-link" href="mailto:delraybeachwatches@gmail.com">delraybeachwatches@gmail.com</a>
+</div>
 
-  <section class="contact" id="contact">
-    <h2>Contact</h2>
-    <div class="contact-row"><strong>Phone:</strong> <a id="phone-link" href="tel:8504851221">850-485-1221</a></div>
-    <div class="contact-row"><strong>Email:</strong> <a id="email-link" href="mailto:delraybeachwatches@gmail.com">delraybeachwatches@gmail.com</a></div>
-    <div class="contact-row"><strong>Location:</strong> <span id="location">Delray Beach, Florida</span></div>
-  </section>
+<div class="contact-card">
+<strong>Location</strong>
+<span id="location">Delray Beach, Florida</span>
+</div>
+
+</div>
+</div>
 
 </div>
 
-<footer>
-  © 2026 Delray Beach Watches. All rights reserved.
-</footer>
-
 <script>
-async function loadSite() {
-  try {
-    const res = await fetch('/content/site.json');
-    if (!res.ok) return;
-    const data = await res.json();
+async function loadSite(){
+ try{
+  const res=await fetch('/content/site.json');
+  if(!res.ok)return;
+  const d=await res.json();
 
-    document.title = data.siteTitle || 'Delray Beach Watches';
-    document.getElementById('site-title').textContent = data.siteTitle || 'Delray Beach Watches';
-    document.getElementById('hero-headline').textContent = data.heroHeadline || 'Curated Luxury Watches for Collectors and Enthusiasts';
-    document.getElementById('hero-subheadline').textContent = data.heroSubheadline || 'Buy, sell, and trade exceptional timepieces with a boutique experience in Delray Beach.';
-    document.getElementById('hero-image').src = data.heroImage || 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49';
+  document.getElementById('site-title').textContent=d.siteTitle||'Delray Beach Watches';
+  document.getElementById('hero-headline').textContent=d.heroHeadline||'Curated Luxury Watches';
+  document.getElementById('hero-subheadline').textContent=d.heroSubheadline||'Luxury timepieces';
+  document.getElementById('hero-image').src=d.heroImage||'';
 
-    const phone = data.phone || '850-485-1221';
-    const email = data.email || 'delraybeachwatches@gmail.com';
-    const location = data.location || 'Delray Beach, Florida';
+  const phone=d.phone||'850-485-1221';
+  const email=d.email||'delraybeachwatches@gmail.com';
+  const loc=d.location||'Delray Beach, Florida';
 
-    const phoneLink = document.getElementById('phone-link');
-    const emailLink = document.getElementById('email-link');
+  const p=document.getElementById('phone-link');
+  const e=document.getElementById('email-link');
 
-    phoneLink.textContent = phone;
-    phoneLink.href = 'tel:' + phone.replace(/[^0-9]/g, '');
+  p.textContent=phone;
+  p.href='tel:'+phone.replace(/[^0-9]/g,'');
 
-    emailLink.textContent = email;
-    emailLink.href = 'mailto:' + email;
+  e.textContent=email;
+  e.href='mailto:'+email;
 
-    document.getElementById('location').textContent = location;
-  } catch (e) {
-    console.error('Site settings failed to load:', e);
-  }
+  document.getElementById('location').textContent=loc;
+
+ }catch(e){}
 }
 
-async function loadWatches() {
-  try {
-    const res = await fetch('/content/watches.json');
-    if (!res.ok) return;
-    const data = await res.json();
+async function loadWatches(){
+ try{
+  const res=await fetch('/content/watches.json');
+  if(!res.ok)return;
+  const data=await res.json();
+  const watches=data.items||[];
+  const grid=document.getElementById('watch-grid');
 
-    const watches = data.items || [];
-    const grid = document.getElementById('watch-grid');
-    grid.innerHTML = '';
+  watches.forEach(w=>{
+    const c=document.createElement('div');
+    c.className='card';
 
-    watches.forEach(watch => {
-      const card = document.createElement('div');
-      card.className = 'card';
+    c.innerHTML=`
+    <img src="${w.image||''}">
+    <div class="card-content">
+      <div>${w.name||''}</div>
+      <div class="price">${w.price||''}</div>
+      <p>${w.description||''}</p>
+    </div>`;
 
-      card.innerHTML = `
-        <img src="${watch.image || ''}" alt="${watch.name || 'Watch'}">
-        <div class="card-content">
-          <div class="card-title">${watch.name || ''}</div>
-          <div class="price">${watch.price || ''}</div>
-          <p>${watch.description || ''}</p>
-        </div>
-      `;
+    grid.appendChild(c);
+  });
 
-      grid.appendChild(card);
-    });
-  } catch (e) {
-    console.error('Watches failed to load:', e);
-  }
+ }catch(e){}
 }
 
-async function init() {
-  await loadSite();
-  await loadWatches();
-}
-
-init();
+loadSite();
+loadWatches();
 </script>
 
 </body>
