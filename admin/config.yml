@@ -6,14 +6,34 @@ media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - name: "pages"
-    label: "Pages"
+  - name: "site"
+    label: "Site Settings"
     files:
-      - file: "content/home.md"
-        label: "Home Page"
-        name: "home"
+      - label: "Homepage Content"
+        name: "homepage"
+        file: "content/site.json"
         fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Headline", name: "headline", widget: "string" }
-          - { label: "Subheadline", name: "subheadline", widget: "text" }
-          - { label: "Hero Image", name: "hero_image", widget: "image", required: false }
+          - { label: "Site Title", name: "siteTitle", widget: "string" }
+          - { label: "Hero Headline", name: "heroHeadline", widget: "string" }
+          - { label: "Hero Subheadline", name: "heroSubheadline", widget: "text" }
+          - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
+          - { label: "Phone", name: "phone", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Location", name: "location", widget: "string" }
+
+  - name: "inventory"
+    label: "Inventory"
+    files:
+      - label: "Watch Listings"
+        name: "watches"
+        file: "content/watches.json"
+        fields:
+          - label: "Watches"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.name}} - {{fields.price}}"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Price", name: "price", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Image", name: "image", widget: "image", required: false }
