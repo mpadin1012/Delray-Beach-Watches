@@ -9,22 +9,15 @@
     :root {
       --bg: #0c0c0c;
       --panel: #151515;
-      --panel-2: #1d1d1d;
       --text: #f5f1e8;
       --muted: #b7aa92;
       --gold: #c6a66b;
-      --gold-soft: #9f8350;
       --border: rgba(198, 166, 107, 0.2);
       --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -71,10 +64,6 @@
       font-family: Arial, sans-serif;
       font-size: 14px;
       color: #ddd;
-    }
-
-    .nav a {
-      opacity: 0.9;
     }
 
     .nav a:hover {
@@ -163,7 +152,6 @@
       overflow: hidden;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
-      min-height: 100%;
       background: var(--panel);
     }
 
@@ -291,6 +279,10 @@
       color: var(--gold);
     }
 
+    .contact a {
+      color: #f5f1e8;
+    }
+
     footer {
       padding: 18px 20px 40px;
       text-align: center;
@@ -372,8 +364,8 @@
   <section class="hero">
     <div class="hero-copy">
       <div class="eyebrow">Luxury Timepieces</div>
-      <h1 id="hero-headline"></h1>
-      <p id="hero-subheadline"></p>
+      <h1 id="hero-headline">Curated Luxury Watches for Collectors and Enthusiasts</h1>
+      <p id="hero-subheadline">Buy, sell, and trade exceptional timepieces with a boutique experience in Delray Beach.</p>
 
       <div class="buttons">
         <a class="btn btn-primary" href="#inventory">View Inventory</a>
@@ -382,7 +374,7 @@
     </div>
 
     <div class="hero-image-wrap">
-      <img id="hero-image" src="" alt="Luxury watch">
+      <img id="hero-image" src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49" alt="Luxury watch">
     </div>
   </section>
 
@@ -414,9 +406,9 @@
 
   <section class="contact" id="contact">
     <h2>Contact</h2>
-    <div class="contact-row"><strong>Phone:</strong> <span id="phone"></span></div>
-    <div class="contact-row"><strong>Email:</strong> <span id="email"></span></div>
-    <div class="contact-row"><strong>Location:</strong> <span id="location"></span></div>
+    <div class="contact-row"><strong>Phone:</strong> <a id="phone-link" href="tel:8504851221">850-485-1221</a></div>
+    <div class="contact-row"><strong>Email:</strong> <a id="email-link" href="mailto:delraybeachwatches@gmail.com">delraybeachwatches@gmail.com</a></div>
+    <div class="contact-row"><strong>Location:</strong> <span id="location">Delray Beach, Florida</span></div>
   </section>
 
 </div>
@@ -427,9 +419,73 @@
 
 <script>
 async function loadSite() {
-  const res = await fetch('/content/site.json');
-  const data = await res.json();
+  try {
+    const res = await fetch('/content/site.json');
+    if (!res.ok) return;
+    const data = await res.json();
 
-  document.title = data.siteTitle || '';
-  document.getElementById('site-title').textContent = data.siteTitle || '';
-  document.getElementById('hero-headline').textContent = data.heroHeadline ||
+    document.title = data.siteTitle || 'Delray Beach Watches';
+    document.getElementById('site-title').textContent = data.siteTitle || 'Delray Beach Watches';
+    document.getElementById('hero-headline').textContent = data.heroHeadline || 'Curated Luxury Watches for Collectors and Enthusiasts';
+    document.getElementById('hero-subheadline').textContent = data.heroSubheadline || 'Buy, sell, and trade exceptional timepieces with a boutique experience in Delray Beach.';
+    document.getElementById('hero-image').src = data.heroImage || 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49';
+
+    const phone = data.phone || '850-485-1221';
+    const email = data.email || 'delraybeachwatches@gmail.com';
+    const location = data.location || 'Delray Beach, Florida';
+
+    const phoneLink = document.getElementById('phone-link');
+    const emailLink = document.getElementById('email-link');
+
+    phoneLink.textContent = phone;
+    phoneLink.href = 'tel:' + phone.replace(/[^0-9]/g, '');
+
+    emailLink.textContent = email;
+    emailLink.href = 'mailto:' + email;
+
+    document.getElementById('location').textContent = location;
+  } catch (e) {
+    console.error('Site settings failed to load:', e);
+  }
+}
+
+async function loadWatches() {
+  try {
+    const res = await fetch('/content/watches.json');
+    if (!res.ok) return;
+    const data = await res.json();
+
+    const watches = data.items || [];
+    const grid = document.getElementById('watch-grid');
+    grid.innerHTML = '';
+
+    watches.forEach(watch => {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      card.innerHTML = `
+        <img src="${watch.image || ''}" alt="${watch.name || 'Watch'}">
+        <div class="card-content">
+          <div class="card-title">${watch.name || ''}</div>
+          <div class="price">${watch.price || ''}</div>
+          <p>${watch.description || ''}</p>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+  } catch (e) {
+    console.error('Watches failed to load:', e);
+  }
+}
+
+async function init() {
+  await loadSite();
+  await loadWatches();
+}
+
+init();
+</script>
+
+</body>
+</html>
